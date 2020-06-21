@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+{% block content %}
+	{# Put the form in our cotent block #}
+	<div class="content-section"> {# This is actually a style in our main.css file #}
+		<form method="POST" action=""{#EMPTY ACTION MEANS: POSTINF THE INFORMATION(here form) ON THE SAME ROUTE THAT WE ARE CURRENTLY ON#}>
+			{# Now,we will start adding form fields #}
+			{{ form.hidden_tag() }}
+			{# form is passed in template from project.py file and 'hidden_tag()' is a method 
+			   we need to add this as this adds something called CSRF(Cross-site Request forgery) token for protection#}
+			{# We will add more fields now along with some HTML and CSS, Bootstrap stuff for nicer look #}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Log In</legend> <!-- mb: margin border -->
+				{# Now, let's add field we created in our form.py file #}
+				<div class="form-group">
+					{{ form.email.label(class="form-control-label") }}
+					{% if form.email.errors %} {# This conditional statement will only be hit when we face errors #}
+						{{ form.email(class="form-control form-contol-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.email.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.email(class="form-control form-contol-lg") }} {# give a textfield box #}
+					{% endif %}
+				</div>
+				<div class="form-group">
+					{{ form.password.label(class="form-control-label") }}
+					{% if form.password.errors %} {# This conditional statement will only be hit when we face errors #}
+						{{ form.password(class="form-control form-contol-lg is-invalid") }}
+						<div class="invalid-feedback">
+							{% for error in form.password.errors %}
+								<span>{{ error }}</span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.password(class="form-control form-contol-lg") }} {# give a textfield box #}
+					{% endif %}
+				</div>
+				{# Now let us create the 'Remember Me' Checkbox and won't need validation as it will be either checked or not #}
+				<div class="form-check">
+					{{ form.remember(class="form-check-input") }}
+					{{ form.remember.label(class="form-check-label") }}
+				</div>
+			</fieldset>
+			{# Let us create a submit button now #}
+			<div class="form-group">
+				{{ form.submit(class="btn btn-outline-info {# This is a nice blue-coloured outlined button style in bootstrap #}") }}
+                                                      {# btn is a class here #}
+			</div>
+			
+			{# Let us add a 'Forget Password Method here' #}
+			<small class="text-muted ml-2">
+				<a href="#">Forgot Password?</a>
+				{# Here if we write '#' it means this goes nowhere. #}
+			</small>
+
+		</form>
+	</div>
+	{# We can add an option for already registered users to go to the login page 
+	   E.g.: "If you already have an account, sign-up"
+	#}
+	<div class="border-top pt-3"> {# pt-3: padding top whose value=3#}
+		<small class="text-muted"> {# Fades out text a little bit #}
+			Need An Account ? <a class="ml-2" href="{{ url_for('register') }}"> Sign Up Now </a>
+						  {# ml-2:marginleft=2 , gives spacing between link #}
+						  {# The argument for url_for is not the route but the name of the function inside it. #}
+		</small> {# we will give some small text here. #}
+	</div>
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+

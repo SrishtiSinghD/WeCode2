@@ -1,0 +1,19 @@
+	{#This about file will make use of inheritance from layout class to form a webpage#}
+
+{% extends "layout.html" %}
+	{# 
+	This will inherit all the layout from the layout.html file
+	We can only override the blocks mentioned there to make unique content in specified web page
+	For e.g.: In our layout file we made our whole <body> tag as a block to be edited by child class.
+	#}
+
+{% block content %}
+	<h1>About Page</h1>
+{% endblock content %}
+
+	{# We can simply start overriding a block by:
+		1. Start the code block using Syntax: {% block name_of_block %}
+		2. Unique content you want to add in that file.
+		3. End the block using Syntax : {% endblock %} or {% endblock name_of_block %}
+					    -->Explicitly mentioning block name in endblock helps you to keep track of which block you closed.
+	#}

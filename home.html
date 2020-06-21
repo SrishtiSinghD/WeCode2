@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+	<!-- COMMENT 1
+	Now let's add a if condition where:
+	1. We want to pass title to our web pages.
+	2. If not passed the add a default title (like Flask Blog).
+	-->
+	{% if title %}
+		<title>Flask Blog - {{ title }}</title>
+	{% else %}
+		<title> Flask Blog </title>  {# Always take care of indentation #}
+	{% endif %}
+  </head>
+
+  <body>
+	<h1>Home Page</h1>
+	<h2>Posts</h2>
+
+        <!-- COMMENT 1
+	The templating engine that flask uses is Jinja2 and it allows us to write code within our templates.
+        -->
+        
+	<!-- COMMENT 2
+	To write a for loop here we open up a code block.
+	Code Block is used to write code snippets in our templates.
+	To write a comment in Jinja2 , Syntax: {# comment #}
+	{# A code block is represented by : {% write_your_code %} #}
+	NOTE: {# I am writing this "{% write_your_code %}" within comments as otherwise Jinja2 will try to parse it, 
+		even if it is within html comments tags #}
+	For e.g. : {#
+		   A for loop can be written as:
+		   {% for i in list %}            (Starts a for loop)
+		   	Body of for loop
+		   {% endfor %}                   (Ends a for loop)
+		   #}
+	-->
+	
+	{% for post in posts_var %}
+		<h3>{{ post.title }}</h3> 
+		<p>By {{ post.author }} on {{ post.date_posted}}</p>
+		<p>{{ post.content }}</p>
+
+		<!-- COMMENT 3
+		We didn't used a Code Block as we are just printing a variable 
+		To print a variable, syntax : {{ variable_name }}
+		To specify it's type we always use tags here
+		Syntax: <tag(s)>{{ variable_name }}<!tag(s)>
+		-->
+	
+	{% endfor %}
+  </body>
+</html>
